@@ -14,6 +14,7 @@ fn_to_display_name = {
     'index.html': 'Home',
     'about.html': 'About Me',
     'resume.html': 'Resume',
+    'younglife.html': 'Young Life',
 }
 
 # Add header to all pages
