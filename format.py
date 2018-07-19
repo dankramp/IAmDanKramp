@@ -1,6 +1,7 @@
 from subprocess import run, PIPE
 import re
 
+to_folder = './pages/'
 from_folder = './pre/'
 
 output = (run(['ls', from_folder], stdout=PIPE).stdout).decode('utf-8')
@@ -13,6 +14,8 @@ fn_to_display_name = {
     'index.html': 'Home',
     'about.html': 'About Me',
     'resume.html': 'Resume',
+    'younglife.html': 'Young Life',
+    '404.html': '404',
 }
 
 # Add header to all pages
@@ -30,11 +33,15 @@ for fn in files:
     new_contents = new_contents.replace('!' + fn + '!', 'active')
     new_contents = re.sub(r'!\w+.html!', '', new_contents)
     # Localize paths and write
-    if fn == 'index.html':
+    if fn == 'index.html' or fn == '404.html':
+        new_contents = new_contents.replace('!TOP!', './').replace('!NEST!', to_folder)
+        new_contents = '---\npermalink: /' + fn + '\n---\n' + new_contents
         with open(fn, 'w') as f:
             f.write(new_contents)
     else:
-        with open(fn.replace('.html', '/') + 'index.html', 'w') as f:
+        new_contents = new_contents.replace('!TOP!', '../').replace('!NEST!', '')
+        new_contents = '---\npermalink: /' + fn.replace('.html', '/') + '\n---\n' + new_contents
+        with open(to_folder + fn, 'w') as f:
             f.write(new_contents)
             
     print('done')

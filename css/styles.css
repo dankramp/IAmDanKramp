@@ -2,6 +2,14 @@ body {
 	padding-top: 40px;
 }
 
+.container {
+	padding: 15px;
+}
+
+.container-fluid {
+	padding: 15px;
+}
+
 .home-background {
 	background-image: url("../images/home_background_alt1.jpg");
 	background-color: #eee;
