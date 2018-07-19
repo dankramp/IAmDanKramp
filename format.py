@@ -1,6 +1,7 @@
 from subprocess import run, PIPE
 import re
 
+to_folder = './pages/'
 from_folder = './pre/'
 
 output = (run(['ls', from_folder], stdout=PIPE).stdout).decode('utf-8')
@@ -33,12 +34,14 @@ for fn in files:
     new_contents = re.sub(r'!\w+.html!', '', new_contents)
     # Localize paths and write
     if fn == 'index.html' or fn == '404.html':
+        new_contents = new_contents.replace('!TOP!', './').replace('!NEST!', to_folder)
+        new_contents = '---\npermalink: /' + fn + '\n---\n' + new_contents
         with open(fn, 'w') as f:
             f.write(new_contents)
     else:
-        new_fn = fn.replace('.html', '/')
-        new_contents = '---\npermalink: /' + new_fn + '\n---\n' + new_contents
-        with open(new_fn + 'index.html', 'w') as f:
+        new_contents = new_contents.replace('!TOP!', '../').replace('!NEST!', '')
+        new_contents = '---\npermalink: /' + fn.replace('.html', '/') + '\n---\n' + new_contents
+        with open(to_folder + fn, 'w') as f:
             f.write(new_contents)
             
     print('done')
