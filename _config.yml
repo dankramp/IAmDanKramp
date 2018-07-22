@@ -1,5 +1,0 @@
-defaults:
-  - scope:
-      path: "images/younglife/slides"
-    values:
-      image: true
