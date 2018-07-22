@@ -7,47 +7,24 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/brands.css" integrity="sha384-7xAnn7Zm3QC1jFjVc1A6v/toepoG3JXboQYzbM0jrPzou9OFXm/fY6Z/XiIebl/k" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/fontawesome.css" integrity="sha384-ozJwkrqb90Oa3ZNb+yKFW2lToAWYdTiF1vt8JiH5ptTGHTGcN7qdoR1F95e0kYyG" crossorigin="anonymous">
-	<link rel="stylesheet" href="/home/dank/Website/css/styles.css">
+	<link rel="stylesheet" href="/css/styles.css">
 
-	<title>Dan Kramp - !PAGENAME!</title>
+	<title>Dan Kramp - {{ page.title }}</title>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<a class="navbar-brand" href="!TOP!index.html">Dan Kramp</a>
+		<a class="navbar-brand" href="/">Dan Kramp</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item !index.html!">
-					<a class="nav-link" href="!TOP!index.html">Home</a>
-				</li>
-				<li class="nav-item !about.html!">
-					<a class="nav-link" href="!NEST!about.html">About Me</a>
-				</li>
-				<li class="nav-item !resume.html!">
-					<a class="nav-link" href="!NEST!resume.html">Resume</a>
-				</li>
-				<li class="nav-item !younglife.html!">
-					<a class="nav-link" href="!NEST!younglife.html">Young Life</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="https://github.com/dankramp/Java-Creations">Java Games</a>
-				</li>
-				<!--
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						JS Games
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">Game 1</a>
-						<a class="dropdown-item" href="#">Game 2</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="https://github.com/dankramp/Java-Creations" target="_blank">Java Games</a>
-					</div>
-				</li>
-			-->
+				{% for item in site.data.pages.pages %}
+   				<li class="nav-item {% if item.url == page.url %}active{% endif %}">
+     				<a class="nav-link" href="{{ item.url }}">{{ item.title }}</a>
+   				</li>
+				{% endfor %}
 			</ul>
 			<span style="font-size: 2em; color: gray; padding-right: 8px">
 				<a class="fab fa-instagram link-no-style" href="https://www.instagram.com/dankramp/" target="_blank"> </a>
@@ -61,7 +38,7 @@
 		</div>
 	</nav>
 
-	!CONTENT!
+	{{ content }}
 
 	<footer class="text-muted bg-dark">
 		<div class="container">

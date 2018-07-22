@@ -1,0 +1,11 @@
+pages:
+- title: Home
+  url: /
+- title: About Me
+  url: /about/
+- title: Resume
+  url: /resume/
+- title: Young Life
+  url: /younglife/
+- title: Java
+  url: https://github.com/dankramp/Java-Creations
