@@ -1,0 +1,36 @@
+pages:
+- title: Home
+  url: /
+- title: About Me
+  url: /about/
+- title: Resume
+  url: /resume/
+- title: Young Life
+  url: /younglife/
+- title: Java
+  url: https://github.com/dankramp/Java-Creations
+
+yl-slides:
+- caption: Young Life Banquet 2017
+  src: /images/younglife/slides/yl_1.jpg
+- caption: Saranac Lake 2018
+  src: /images/younglife/slides/yl_2.jpg
+- caption: Lake Champion 2017
+  src: /images/younglife/slides/yl_3.jpg
+- caption: Lake Champion 2017
+  src: /images/younglife/slides/yl_4.jpg
+- caption: Lake Champion 2017
+  src: /images/younglife/slides/yl_5.jpg
+- caption: Fall Weekend 2017
+  src: /images/younglife/slides/yl_6.jpg
+
+yl-pics:
+- caption: The entire Team Greene at placement night 2018. Welcome Sarah and Alec!
+  src: /images/younglife/yl_page_2.jpg
+  alt: Young Life placement night
+- caption: Not technically Young Life, but 316 had some great dance parties and we had great costumes.
+  src: /images/younglife/yl_page_4.jpg
+  alt: 316 dance party costume
+- caption: A trip to Moose's by the Creek for brunch with all the boys.
+  src: /images/younglife/yl_page_3.jpg
+  alt: Moose's By the Creek
