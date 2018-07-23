@@ -9,6 +9,8 @@ pages:
   url: /younglife/
 - title: Java
   url: https://github.com/dankramp/Java-Creations
+- title: JS Projects
+  url: /js/
 
 yl-slides:
 - caption: Young Life Banquet 2017

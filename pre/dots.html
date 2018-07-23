@@ -9,7 +9,7 @@ permalink: /js/springy/
 			<canvas id="the-canvas" width="1600px" height="900px">Something is wrong...</canvas>
 		</div>
 		<div class="col-xl-3">
-			<div class="card h-100" style="overflow-y: scroll;">
+			<div class="card" id="settings-menu" style="overflow-y: scroll;">
 				<div class="card-body">
 					<h3 class="card-title">Springy Graph</h3>
 					<p class="card-text">Use the settings below to customize the graph on the left. When you are ready, click "Update" at the bottom to see your new randomly generated graph!</p>
@@ -41,6 +41,31 @@ permalink: /js/springy/
 					</div>
 					<button type="button" class="btn btn-primary" id="update-btn" onclick="create()">Update</button>
 				</div>
+				<div class="card-footer">
+					<a data-toggle="modal" href="#helpModal" class="text-muted" href=>Help! What is going on here?</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="helpModalLabel">What am I looking at?</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p>What you are seeing is a randomly generated graph that is reacting to three (possibly four) forces.</p>
+				<p>The first force is a general repulsive force between all dots, connected or not. This works like an electrostatic force and grows weaker the farther any point dots are from eachother. The second force opposes this: an attractive spring force between all connected dots. This graph will eventually "settle" when these two forces cancel out, which occurs when dots are as close to the spring length as possible, or in the lowest state of energy.</p>
+				<p>The last force is a "gravitational" force, which in this case is simply a spring force from all particles to the center of the screen. This keeps everything from floating away into oblivion. Optionally, you can add a similar force to your mouse position so that the dots are attracted to it.</p>
+				<strong>Isn't physics <em>incredible??</em></strong>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>
@@ -114,7 +139,7 @@ permalink: /js/springy/
 	}
 	function windowResize(e) {
 		width = canvas.width = canvas_div.offsetWidth;
-		height = canvas.height = canvas_div.offsetHeight;
+		height = canvas.height = document.getElementById("settings-menu").offsetHeight;
 	}
 	function create(e) {
 		var p = document.getElementById("inputNumPoints").value;
