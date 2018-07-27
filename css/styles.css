@@ -46,6 +46,11 @@ iframe.resume {
 	height: 100%;
 }
 
+img.grayscale {
+	-webkit-filter: grayscale(1); /* Webkit */
+	filter: gray; /* IE6-9 */
+	filter: grayscale(1); /* W3C */
+}
 
 .link-no-style {
 	text-decoration: none;

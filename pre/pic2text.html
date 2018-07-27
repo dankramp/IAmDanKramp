@@ -1,0 +1,206 @@
+---
+layout: default
+title: Pic2Text
+permalink: /js/pic2text/
+---
+<div class="container-fluid" id="parent-div" style="height: 90%;">
+	<div class="row h-100 justify-content-center align-items-center">
+		<div class="col-auto col-xl-3">
+			<div class="card h-100" id="settings-menu">
+				<div class="card-body">
+					<h2 class="card-title">Pic2Text Generator</h2>
+					<div id="html5-div">
+						<p class="card-text">Upload an image file below to be converted to text!</p>
+						<p class="card-text text-muted">All image types accepted</p>
+						<p></p>
+						<div class="custom-file" id="file-input-div">
+							<input type="file" class="custom-file-input" id="file-input" accept="image/*">
+							<label class="custom-file-label" for="file-input">Choose file</label>
+						</div>
+					</div>
+					<p></p>
+					<div id="non-html5-div" style="display: none;">
+						<p class="card-text">Paste the Base64 encoded image file below to be converted to text!</p>
+						<p class="card-text text-muted"><a href="https://www.base64-image.de/" target="_blank" class="link-no-style">Click here to encode an image as Base64</a></p>
+						<p></p>
+						<div class="container-fluid" id="text-input-div">
+							<textarea id="imgUrlInput" rows="5" placeholder="Paste image Base64 here" class="w-100"></textarea><br />
+						</div>
+					</div>
+
+					<div class="container" id="image-invalid" style="display: none;">
+						<div class="alert alert-danger" role="alert">Selected file is not valid image file!</div>
+					</div>
+					<div class="container invisible" id="image-preview">
+						<div class="card" style="width: 22em;">
+							<img class="card-img-top grayscale" id="image-dom" src="" alt="Image not found">
+							<div class="card-footer">				
+								<span class="text-muted">Preview of uploaded image to be converted</span>
+							</div>
+						</div>
+						<p></p>
+						<div class="form-group col-auto">									
+							<label for="resolution-input" id="resolution-label">Resolution [5]</label>
+							<input type="range" class="form-control-range custom-range" id="resolution-input" min="1" max="8" value="5">
+							<small id="resolutionHelp" class="form-text text-muted">Higher numbers yield bigger text output</small>
+						</div>
+						<div class="form-group text-center">
+							<button type="button" class="btn btn-primary" id="generate-text-btn" onclick="convertToText()">Convert to Text</button>									
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-auto col-xl-6 text-center">
+			<pre id="generated-text-pre">[ Your generated text will appear here ]</pre>
+			<button type="button" class="btn btn-secondary" onclick="copyText()" disabled="disabled" id="copy-btn">Copy text to clipboard</button>
+		</div>
+	</div>
+</div>
+<script>
+	var imageUrlInput,
+	resolutionInput,
+	resolution,
+	img,
+	imageDiv,
+	imageWarning,
+	pre;
+	document.body.onload = function() {
+		img = document.getElementById("image-dom");
+		img.addEventListener("error", badImageFile);	
+		imageDiv = document.getElementById("image-preview");
+		imageWarning = document.getElementById("image-invalid");
+		pre = document.getElementById("generated-text-pre");
+		resolutionInput = document.getElementById("resolution-input");
+		resolution = 5;
+		resolutionInput.addEventListener("change", updateResolution);
+		resolutionInput.addEventListener("input", updateResolution);
+		// Check if HTML5 support
+		if (!(window.File && window.FileReader && window.FileList && window.Blob)) { 
+			// No file upload; paste base 64 instead
+			document.getElementById("html5-div").style = "display: none;";
+			document.getElementById("non-html5-div").style = "";
+			imageUrlInput = document.getElementById("imgUrlInput");
+			imageUrlInput.addEventListener("blur", function() {
+				imageDiv.classList.remove("invisible");
+				imageWarning.style = "display: none;";
+				img.src = imageUrlInput.value;
+			});
+		} else {
+			document.getElementById("file-input").addEventListener("change", handleFileSelect_HTML5);
+		}
+
+	};
+
+	function updateResolution(e) {
+		resolution = 9 - resolutionInput.value;
+		document.getElementById("resolution-label").innerHTML = "Resolution [" + resolutionInput.value + "]";
+	}
+
+	function badImageFile() {
+		imageDiv.classList.add("invisible");
+		imageWarning.style = "";
+	}
+
+	function handleFileSelect_HTML5(e) {
+		// Get only first file
+		var file = e.target.files[0];
+		var reader = new FileReader();
+
+		// Show image preview
+		reader.onload = function(e) {
+			var result = e.target.result;
+			imageDiv.classList.remove("invisible");
+			imageWarning.style = "display: none;";
+			img.src = result;
+		}
+
+      	// Read in the image file as a data URL.
+      	reader.readAsDataURL(file);
+      }
+
+      function handleFileSelect(e) {
+      	var file = e.target.files[0];
+      	console.log(file);
+      }
+
+      function copyText() {
+      	const temp = document.createElement('textarea');
+      	temp.value = pre.innerHTML;
+      	document.body.appendChild(temp);
+      	temp.select();
+      	document.execCommand('copy');
+      	document.body.removeChild(temp);
+      }
+
+      function convertToText() {
+      	var data = getImageArrayData();
+
+      	const NUM_BYTES = 4;
+
+      	var output = "";
+      	var i, j, li, lj, px, py, i_offset, j_offset, px_offset, base_offset;
+      	for (i = 0, li = img.height / resolution; i < li; i++) {
+      		i_offset = i * img.width * resolution;
+      		var max_row = (i + 1 < li) ? resolution : img.height - i * resolution;
+      		for (j = 0, lj = img.width / resolution; j < lj; j++) {
+      			j_offset = j * resolution;
+      			var max_col = (j + 1 < lj) ? resolution : img.width - j * resolution;
+      			var avgValue = 0;
+				for (px = 0; px < max_row; px++) { // pixel x
+					px_offset = px * img.width;
+					for (py = 0; py < max_col; py++) { // pixel y
+						base_offset = (i_offset + j_offset + px_offset + py) * NUM_BYTES;			
+						var totalValue = data[base_offset + 0]; // red
+						totalValue += data[base_offset + 1]; // green
+						totalValue += data[base_offset + 2]; // blue
+						//totalValue *= data[base_offset + 3]; // alpha not yet supported
+						avgValue += totalValue / 3;
+					}
+				}
+				avgValue /= (max_row * max_col);
+				output += getCharacterForValue(avgValue);
+			}
+			output += "\n";
+		}
+
+		// Add text to pre element
+		pre.innerHTML = output;
+		pre.style = "font-size: 5px; line-height: 1.2em;";
+		// Add copy text button
+		document.getElementById("copy-btn").disabled = "";
+	}
+
+	function getCharacterForValue(value) {
+		/*
+		const ramp = "$@B%8&WM#oawmZO0JUYXzcvjft/|()1[]?-_+~i;:,^`'. ";
+		const length = ramp.length;
+		var character = ramp[Math.floor(value / 255.0 * length)]
+		return character + character;
+		*/
+		if (value < 25) {		
+			return "@@";
+		} else if (value < 35) {
+			return "BB";
+		} else if (value < 55) {
+			return "00";
+		} else if (value < 100) {
+			return "11";
+		} else if (value < 160) {
+			return "::";
+		} else if (value < 200) {
+			return "..";
+		} else {
+			return "  ";
+		}
+	}
+
+	function getImageArrayData() {
+		var canvas = document.createElement("canvas");
+		canvas.width = img.width;
+		canvas.height = img.height;
+		var ctx = canvas.getContext("2d");
+		ctx.drawImage(img, 0, 0, img.width, img.height);
+		return ctx.getImageData(0, 0, img.width, img.height).data;
+	}
+</script>
