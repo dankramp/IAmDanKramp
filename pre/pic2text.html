@@ -15,7 +15,7 @@ permalink: /js/pic2text/
 						<p></p>
 						<div class="custom-file" id="file-input-div">
 							<input type="file" class="custom-file-input" id="file-input" accept="image/*">
-							<label class="custom-file-label" for="file-input">Choose file</label>
+							<label class="custom-file-label text-truncate" id="file-input-label" for="file-input">Choose file</label>
 						</div>
 					</div>
 					<p></p>
@@ -64,6 +64,7 @@ permalink: /js/pic2text/
 	img,
 	imageDiv,
 	imageWarning,
+	fileInputLabel,
 	pre;
 	document.body.onload = function() {
 		img = document.getElementById("image-dom");
@@ -75,6 +76,7 @@ permalink: /js/pic2text/
 		resolution = 5;
 		resolutionInput.addEventListener("change", updateResolution);
 		resolutionInput.addEventListener("input", updateResolution);
+		fileInputLabel = document.getElementById("file-input-label");
 		// Check if HTML5 support
 		if (!(window.File && window.FileReader && window.FileList && window.Blob)) { 
 			// No file upload; paste base 64 instead
@@ -87,7 +89,7 @@ permalink: /js/pic2text/
 				img.src = imageUrlInput.value;
 			});
 		} else {
-			document.getElementById("file-input").addEventListener("change", handleFileSelect_HTML5);
+			document.getElementById("file-input").addEventListener("change", handleFileSelect);
 		}
 
 	};
@@ -102,9 +104,10 @@ permalink: /js/pic2text/
 		imageWarning.style = "";
 	}
 
-	function handleFileSelect_HTML5(e) {
+	function handleFileSelect(e) {
 		// Get only first file
 		var file = e.target.files[0];
+		fileInputLabel.innerHTML = file.name;
 		var reader = new FileReader();
 
 		// Show image preview
@@ -117,11 +120,6 @@ permalink: /js/pic2text/
 
       	// Read in the image file as a data URL.
       	reader.readAsDataURL(file);
-      }
-
-      function handleFileSelect(e) {
-      	var file = e.target.files[0];
-      	console.log(file);
       }
 
       function copyText() {
