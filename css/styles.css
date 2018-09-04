@@ -33,12 +33,15 @@
 .home-title {
 	background: white;
 	color: #334;
+	padding: .15em .15em 0 .15em;
+
 }
 .home-title-inverted {
 	background: #334;
 	color: white;
 	margin-top: 5px;
 	margin-bottom: 0px;
+	padding: .15em .15em 0 .15em;
 }
 
 iframe.resume {
