@@ -1,0 +1,30 @@
+---
+layout: default
+title: HeatMapper
+permalink: /js/HeatMapper/
+---
+<script src="/assets/js/HeatMapper.js"></script>
+<div class="container-fluid text-center">
+  <h1>HeatMapper Generator</h1>
+  <i><b>Click on the range below to add a new color.</b><br />
+    Click a rectangle to change the color, or click and drag to move.<br />
+    Right click a rectangle to remove it.</i>
+  <br/><br/>
+  <canvas id="heatCanvas" width="1000px" height="100px" style="border: 2px solid grey"></canvas>
+  <ul id="input-list" style="list-style-type: none"></ul>
+  <input type="checkbox" id="log-check"><label for="log-check"> Logarithmic scale?</label>
+  <br />
+  <br />
+  <textarea rows="15" cols="100" id="code-box" disabled>// Auto-generated code will appear here
+    
+    var colors = [];
+    var scale = [];
+    var heatmap = new HeatMapper(colors, scale);
+  </textarea>
+
+  <br />
+  
+  <code>heatmap.getHexColor(</code><input type="text" id="get-value" size="3"><code id="code-2">) = </code><p id="hex-value"></p>
+  
+  <script src="/assets/js/generatorScript.js"></script>
+</div>
