@@ -11,6 +11,8 @@ pages:
   url: https://github.com/dankramp/Java-Creations
 - title: JS Projects
   url: /js/
+- title: R2F4 Blog
+  url: /blog/
 
 yl-slides:
 - caption: Young Life Banquet 2017

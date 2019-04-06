@@ -63,7 +63,9 @@ img.grayscale {
 	text-decoration: none;
 	color: inherit;
 }
-
+.page-content {
+	font-size: 1.2em;
+}
 .resume-container {
 	width: 100%;
 	margin: auto;
