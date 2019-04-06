@@ -4,22 +4,7 @@ title: Blog - Road(trip) to the Final Four
 permalink: /blog/
 ---
 <div class="container">
-	<div class="row">
-		<div class="col-lg-3">
-			<div class="card">
-				<div class="card-body">
-					<ul class="list-group">
-						{% for post in site.posts %}
-						<a href="{% if post.url != page.url %}{{ post.url }}{% endif %}">
-							<li class="list-group-item {% if post.url == page.url %}disabled{% endif %}">
-								{{ post.title }}
-							</li>
-						</a>
-						{% endfor %}
-					</ul>
-				</div>
-			</div>
-		</div>
+	<div class="row">		
 		<div class="col-lg-9">
 			<div class="card">
 				
@@ -83,6 +68,21 @@ permalink: /blog/
 				</div>
 			</div>
 		</div>	
+		<div class="col-lg-3">
+			<div class="card">
+				<div class="card-body">
+					<ul class="list-group">
+						{% for post in site.posts %}
+						<a href="{% if post.url != page.url %}{{ post.url }}{% endif %}">
+							<li class="list-group-item {% if post.url == page.url %}disabled{% endif %}">
+								{{ post.title }}
+							</li>
+						</a>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+		</div>
 	</div>	
 </div>
 
