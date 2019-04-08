@@ -1,3 +1,7 @@
+.blog-link-index {
+	padding: 3px;
+}
+
 .card-link:hover {
 	background: #ddd;
 }

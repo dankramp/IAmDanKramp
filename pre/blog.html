@@ -25,7 +25,7 @@ permalink: /blog/
 								<div class="card h-100">
 									<img class="card-img-top" src="/images/blog/carter-bio.jpg" alt="Carter Bio Photo">										
 									<div class="card-body">
-										<div class="card-title">Carter Berry</div>
+										<h4 class="card-title">Carter Berry</h4>
 										<div class="card-text">From mastering the Masters, to having the final word on the Final Four, Carter is the point man on all things sports. His writing style will keep you curiously distant, like watching a car accident. In his free time, Carter likes to create spreadsheets in Excel and his favorite meal is macaroni and cheese with hot dogs.
 										</div>
 									</div>
@@ -35,7 +35,7 @@ permalink: /blog/
 								<div class="card h-100">
 									<img class="card-img-top" src="/images/blog/dan-bio.jpg" alt="Dan Bio Photo">										
 									<div class="card-body">
-										<div class="card-title">Dan Kramp</div>
+										<h4 class="card-title">Dan Kramp</h4>
 										<div class="card-text">Just west of Philadelphia, born and raised, Daniel B. Kramp is a gritty hustler from the streets. He offers all what lies behind the machine learning of this literary venture. Count on a fair share of poetry, prose, and a point of view unique to a fiercely committed Cavalier fan. In the off-season and during his downtime, Dan plays super smash brothers melee and pretends that cars may someday drive themselves. 
 										</div>
 									</div>
@@ -47,7 +47,7 @@ permalink: /blog/
 								<div class="card h-100">
 									<img class="card-img-top" src="/images/blog/gooch-bio.jpg" alt="Gooch Bio Photo">
 									<div class="card-body">
-										<div class="card-title">Robert Gooch</div>
+										<h4 class="card-title">Robert Gooch</h4>
 										<div class="card-text">This is Robert's placeholder bio. He is a cool fellow. This will be filled out with actual text once one of us actually decides to write it. Until that time, it will only contain the information I have just now written here. I hope that's enough for you!
 										</div>
 									</div>
@@ -57,7 +57,7 @@ permalink: /blog/
 								<div class="card h-100">
 									<img class="card-img-top" src="/images/blog/trenton-bio.jpg" alt="Trenton Bio Photo">										
 									<div class="card-body">
-										<div class="card-title">Trenton Burmeister</div>
+										<h4 class="card-title">Trenton Burmeister</h4>
 										<div class="card-text">If you're looking for the <i>bandit</i> of your heart, look no further than Trenton. He's the glue to our trip and is always willing to sacrifice himself for others. He loves Indianapolis, a good laugh, and reminding people of his Midwest roots in Kenosha, WI. He will surely move you with his emotional and passionate writing that he's most likely learned from being a Curry School Biology major.
 										</div>
 									</div>
@@ -71,10 +71,11 @@ permalink: /blog/
 		<div class="col-lg-3">
 			<div class="card">
 				<div class="card-body">
-					<ul class="list-group">
+					<h4 class="card-title">All articles</h4>
+					<ul class="list-group list-group-flush">
 						{% for post in site.posts %}
-						<a href="{% if post.url != page.url %}{{ post.url }}{% endif %}">
-							<li class="list-group-item {% if post.url == page.url %}disabled{% endif %}">
+						<a href="{{ post.url }}">
+							<li class="list-group-item blog-link-index {% if post.url == page.url %}disabled{% endif %}">
 								{{ post.title }}
 							</li>
 						</a>

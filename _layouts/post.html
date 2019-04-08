@@ -10,6 +10,12 @@
 	<link rel="stylesheet" href="/css/styles.css">
 	<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
 
+	<style>
+		img {
+			margin: 15px 0px;
+		}
+	</style>
+
 	<title>Blog - {{ page.title }}</title>
 </head>
 <body>
@@ -64,13 +70,14 @@
 			<div class="col-lg-3">
 				<div class="card">
 					<div class="card-body">
-						<ul class="list-group">
+						<h4 class="card-title">All articles</h4>
+						<ul class="list-group list-group-flush">
 							{% for post in site.posts %}
-							<a href="{% if post.url != page.url %}{{ post.url }}{% endif %}">
-								<li class="list-group-item {% if post.url == page.url %}disabled{% endif %}">
+								{% if post.url != page.url %}<a href="{{ post.url }}">{% endif %}
+								<li class="list-group-item blog-link-index {% if post.url == page.url %}disabled{% endif %}">
 									{{ post.title }}
 								</li>
-							</a>
+								{% if post.url != page.url %}</a>{% endif %}
 							{% endfor %}
 						</ul>
 					</div>
