@@ -64,7 +64,12 @@
 			</div>
 			<div class="col-lg-9">
 				<div class="card">
-					{{ content }}
+					<div class="card-body">
+						<h3 class="card-title">{{ page.title }}</h3>
+						<h6 class="card-subtitle mb-2 text-muted">By {{ page.author }}</h6>
+						<hr>
+						{{ content }}
+					</div>
 				</div>
 			</div>	
 			<div class="col-lg-3">
