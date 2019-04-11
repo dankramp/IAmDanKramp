@@ -1,0 +1,142 @@
+---
+layout: default
+title: Blog - Authors
+permalink: /blog/authors/
+---
+<div class="container">
+	<div class="row">		
+		<div class="col-lg-12">
+			<div class="card">				
+				<div class="card-body">
+					<br /><br />
+					<h1 class="card-title text-center display-4">Meet the R2F4 Authors</h1>
+					<h3 class="text-center"><a href="/blog/" class="link-clean">Home</a></h3>
+					
+					<div class="card">				
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-3">
+									<img class="card-img-top" src="/images/blog/carter-bio.jpg" alt="Carter Bio Photo">
+								</div>
+								<div class="col-md-6">
+									<div class="card-text" style="font-size: 1.2em;">				
+										<h4>Carter Berry</h4>
+										<p class="card-text">From mastering the Masters, to having the final word on the Final Four, Carter is the point man on all things sports. His writing style will keep you curiously distant, like watching a car accident. In his free time, Carter likes to create spreadsheets in Excel and his favorite meal is macaroni and cheese with hot dogs.
+										</p>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<h5>Articles by Carter</h5>
+									<ul class="list-group list-group-flush">
+										{% for post in site.posts %}
+										{% if post.author == 'Carter Berry' %}
+										<a href="{{ post.url }}">
+											<li class="list-group-item blog-link-index">
+												{{ post.title }}
+											</li>
+										</a>
+										{% endif %}
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="card">				
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-3">
+									<img class="card-img-top" src="/images/blog/dan-bio.jpg" alt="Dan Bio Photo">
+								</div>
+								<div class="col-md-6">
+									<div class="card-text" style="font-size: 1.2em;">				
+										<h4>Dan Kramp</h4>
+										<p class="card-text">Just west of Philadelphia, born and raised, Daniel B. Kramp is a gritty hustler from the streets. He offers all what lies behind the machine learning of this literary venture. Count on a fair share of poetry, prose, and a point of view unique to a fiercely committed Cavalier fan. In the off-season and during his downtime, Dan plays super smash brothers melee and pretends that cars may someday drive themselves. 
+										</p>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<h5>Articles by Dan</h5>
+									<ul class="list-group list-group-flush">
+										{% for post in site.posts %}
+										{% if post.author == 'Dan Kramp' %}
+										<a href="{{ post.url }}">
+											<li class="list-group-item blog-link-index">
+												{{ post.title }}
+											</li>
+										</a>
+										{% endif %}
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>	
+
+					<div class="card">				
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-3">
+									<img class="card-img-top" src="/images/blog/gooch-bio.jpg" alt="Gooch Bio Photo">
+								</div>
+								<div class="col-md-6">
+									<div class="card-text" style="font-size: 1.2em;">				
+										<h4>Robert Gooch</h4>
+										<p class="card-text">This is Robert's placeholder bio. He is a cool fellow. This will be filled out with actual text once one of us actually decides to write it. Until that time, it will only contain the information I have just now written here. I hope that's enough for you!
+										</p>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<h5>Articles by Robert</h5>
+									<ul class="list-group list-group-flush">
+										{% for post in site.posts %}
+										{% if post.author == 'Robert Gooch' %}
+										<a href="{{ post.url }}">
+											<li class="list-group-item blog-link-index">
+												{{ post.title }}
+											</li>
+										</a>
+										{% endif %}
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>			
+
+					<div class="card">				
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-3">
+									<img class="card-img-top" src="/images/blog/trenton-bio.jpg" alt="Trenton Bio Photo">		
+								</div>
+								<div class="col-md-6">
+									<div class="card-text" style="font-size: 1.2em;">				
+										<h4>Trenton Burmeister</h4>
+										<p class="card-text">If you're looking for the <i>bandit</i> of your heart, look no further than Trenton. He's the glue to our trip and is always willing to sacrifice himself for others. He loves Indianapolis, a good laugh, and reminding people of his Midwest roots in Kenosha, WI. He will surely move you with his emotional and passionate writing that he's most likely learned from being a Curry School Biology major.
+										</p>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<h5>Articles by Trenton</h5>
+									<ul class="list-group list-group-flush">
+										{% for post in site.posts %}
+										{% if post.author == 'Trenton Burmeister' %}
+										<a href="{{ post.url }}">
+											<li class="list-group-item blog-link-index">
+												{{ post.title }}
+											</li>
+										</a>
+										{% endif %}
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>				
+				</div>
+			</div>
+		</div>
+	</div>
+</div>	

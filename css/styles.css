@@ -67,6 +67,12 @@ img.grayscale {
 	text-decoration: none;
 	color: inherit;
 }
+.link-clean {
+	text-decoration: none;
+}
+.link-clean:hover {
+	text-decoration: none;
+}
 .page-content {
 	font-size: 1.2em;
 }
