@@ -13,7 +13,10 @@
 .container-fluid {
 	padding: 15px;
 }
-
+.float-bottom {
+	position: absolute;
+	bottom: 1em;
+}
 .home-background {
 	background-image: url("../images/home_background_alt1.jpg");
 	background-color: #eee;
@@ -73,6 +76,14 @@ img.grayscale {
 .link-clean:hover {
 	text-decoration: none;
 }
+.lyrics-block {
+	background: white;
+    border: solid #ccc .1em;
+    padding: 1em;
+    font-family: "Georgia", Times, serif;
+    margin: 0 2em 1rem;
+    display: inline-block;
+}
 .page-content {
 	font-size: 1.2em;
 }
@@ -102,4 +113,48 @@ img.grayscale {
 .resume-btn {
 	margin: 30px 10px;
 	width: 90%;
+}
+
+.fa {
+	color: grey;
+	font-size: 1.2em !important;
+}
+
+.star-checked {
+	color: orange;
+}
+
+@keyframes tytube-card-hover-on {
+  from {
+  	box-shadow: #fff 0px 0px 0px;
+  }
+  to {
+  	box-shadow: #ccc 0px 0px 15px;
+  }
+}
+@keyframes tytube-card-hover-off {
+  from {
+  	box-shadow: #ccc 0px 0px 15px;
+  }
+  to {
+  	box-shadow: #fff 0px 0px 0px;
+  }
+}
+.tytube-card {
+	padding: 0px;
+	margin: 8px;
+	animation-name: tytube-card-hover-off;
+	animation-duration: .5s;
+}
+.tytube-card:hover {
+	animation-name: tytube-card-hover-on;
+	animation-duration: .5s;
+	animation-fill-mode: forwards;
+}
+.tytube-logo-search {
+	margin: 1em 0px;
+}
+
+.tytube-logo {
+	margin: 3em 0px;
 }
