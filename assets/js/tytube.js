@@ -21,6 +21,7 @@ const cookiePrefix = "iadk-tytv-rating-"
 const noRatingAvailableText = "No rating";
 let searchString = '';
 let videos = {};
+let next_batch_num = 0;
 
 async function postData(url = '', data = {}) {
   const response = await fetch(url, {
@@ -92,23 +93,25 @@ function updateCardRating(videoName, rating) {
 	ratingDiv.innerHTML = newHtml;
 }
 
-function loadPage() {
+function loadPage(initial=false) {
 	// Check for query in GET request
 	let query = window.location.search;
-	let re = /query=(.+)[&$]?/;
+	let re = /query=([^&$]+)/;
 	let search = query.match(re);
 	if (search == null) {
 		return;
 	}
 
 	// Configure search page
-	searchString = decodeURIComponent(search[1].replace(/\+/g, '%20'));
-	document.getElementById("tytube-logo-div").className = "col-md-2 tytube-logo-search";
-	document.getElementById("search-input").value = searchString;
-	document.getElementById("search-phrase").innerHTML = searchString;
-	document.getElementById("search-container").classList.remove("d-none");
+	if (initial) {
+		searchString = decodeURIComponent(search[1].replace(/\+/g, '%20'));
+		document.getElementById("tytube-logo-div").className = "col-md-2 tytube-logo-search";
+		document.getElementById("search-input").value = searchString;
+		document.getElementById("search-phrase").innerHTML = searchString;
+		document.getElementById("search-container").classList.remove("d-none");
+	}
 	// Make request to APIG
-	fetch(apiSearchUrl + query)
+	fetch(apiSearchUrl + query + "&batch_num=" + next_batch_num)
 		.then(res => res.json())
 		.then(responseHandler);
 }
@@ -116,15 +119,16 @@ function loadPage() {
 function responseHandler(res) {
 	console.log(res);
 	// Stop loading
-	document.getElementById("search-status").innerHTML = 'Found <b>' + res.length + '</b> result(s) for <b>' + searchString + '</b>';
+	let video_results = res.videos;
+	next_batch_num += 1;
 	let results = document.getElementById("search-results");
 	let newHtml = '';
-	for (let i = 0; i < Math.floor((res.length + 2) / 3); i++) {
+	for (let i = 0; i < Math.floor((video_results.length + 2) / 3); i++) {
 		newHtml += '<div class="row justify-content-center">';
 		for (let j = 0; j < 3; j++) {
 			let index = i * 3 + j;
-			if (index < res.length) {
-				let video = res[index];
+			if (index < video_results.length) {
+				let video = video_results[index];
 				// Add to global map for later updates
 				videos[video.title] = video;
 				// Make matched words bold
@@ -150,7 +154,7 @@ function responseHandler(res) {
 				}
 
 				newHtml += '<div class="card col-sm-3 tytube-card">' +
-					'<a class="link-no-style" href="' + video.url + '">' +
+					'<a class="link-no-style" href="' + video.url + '" target="_blank">' +
 					'<img src="/images/tytv/' + video.title + '.jpg" class="card-img-top" alt="video-thumbnail"></a>' +
 					'<div class="card-body pb-2">' +
 					'<h5 class="card-title">' + video.title + '<small><i id="' + video.title + '-rating-text"> ' + rating_text + '</i></small></h5>' +
@@ -162,7 +166,17 @@ function responseHandler(res) {
 		}
 		newHtml += "</div>";
 	}
-	results.innerHTML = newHtml;
+	document.getElementById("search-status").innerHTML = 'Displaying <b>' + Object.keys(videos).length + '</b> result(s) for <b>' + searchString + '</b>';
+	if (res.videos_remaining) {
+		document.getElementById("load-more-div").innerHTML = '<button class="btn btn-secondary" onclick="loadPage()">Load more</button>';
+	} else {
+		document.getElementById("load-more-div").innerHTML = '';
+	}
+	if (res.batch_num > 0) {
+		results.innerHTML += newHtml;
+	} else {
+		results.innerHTML = newHtml;
+	}
 	for (let videoName in videos) {
 		let rating = getCookieValue(cookiePrefix + videoName);
 		if (rating == null) {
@@ -174,10 +188,9 @@ function responseHandler(res) {
 	}
 }
 
-// '<i class="fa fa-star star-checked"></i><i class="fa fa-star star-checked"></i><i class="fa fa-star star-checked"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>' +
 
 //*********************//
 //** EXECUTION LOGIC **//
 //*********************//
 
-loadPage();
+loadPage(true);
